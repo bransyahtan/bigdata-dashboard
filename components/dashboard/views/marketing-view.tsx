@@ -122,3 +122,4 @@ export const MarketingView: React.FC<MarketingViewProps> = ({ data }) => {
     </div>
   );
 };
+

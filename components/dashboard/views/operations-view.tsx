@@ -136,3 +136,4 @@ export const OperationsView: React.FC<OperationsViewProps> = ({ data }) => {
     </div>
   );
 };
+
