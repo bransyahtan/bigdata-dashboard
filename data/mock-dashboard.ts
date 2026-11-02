@@ -189,6 +189,15 @@ export const MOCK_DASHBOARD_DATA: DashboardDataset = {
     },
   ],
 
+  // 7. Customer Reviews & Sentiment Analytics (8.4M records scale)
+  reviewMetrics: {
+    totalReviews: 8_420_000,
+    averageRating: 4.65,
+    positivePct: 82.4,
+    neutralPct: 13.8,
+    negativePct: 3.8,
+  },
+
   // Inventory Stock Health & Real-time Alerts
   inventoryAlerts: [
     {
@@ -390,6 +399,242 @@ export const MOCK_DASHBOARD_DATA: DashboardDataset = {
       paymentStatus: "Settled",
       shippingTrackingNumber: "TRK-CARGO-550192",
       shippingStatus: "Delivered",
+    },
+  ],
+
+  // Executive Extensions: Anomalies & Retention
+  executiveAnomalies: [
+    {
+      id: "ANM-202611-01",
+      timestamp: "02 Nov 2026, 15:40",
+      metric: "Spike Pembatalan Order (Cancellation Rate)",
+      severity: "High",
+      description: "Lonjakan pembatalan 4.8% pada kategori Peralatan Kantor akibat kegagalan verifikasi limit Corporate Invoicing.",
+      expectedRange: "1.2% - 2.0%",
+      observedValue: "4.82%",
+    },
+    {
+      id: "ANM-202611-02",
+      timestamp: "02 Nov 2026, 12:15",
+      metric: "Volume Transaksi Tak Wajar (Wholesale Surge)",
+      severity: "Medium",
+      description: "Akun CUST-041928 melakukan checkout massal 120 SKU dalam 1 menit, terkonfirmasi pengadaan rutin terverifikasi.",
+      expectedRange: "< 30 SKU / order",
+      observedValue: "120 SKU",
+    },
+    {
+      id: "ANM-202611-03",
+      timestamp: "01 Nov 2026, 23:10",
+      metric: "Delay Inflow Hub Surabaya",
+      severity: "Low",
+      description: "Penumpukan antrian kontainer di Hub Rungkut menyebabkan estimasi dispatch mundur 6 jam.",
+      expectedRange: "< 2 jam",
+      observedValue: "6.4 jam",
+    },
+  ],
+
+  customerAcquisition: {
+    newCustomersMonthly: 248_600,
+    retentionRatePct: 78.4,
+    customerChurnRatePct: 2.8,
+    ltvToCacRatio: 4.85,
+    repeatPurchaseRatePct: 64.2,
+  },
+
+  // Merchant Dashboard Data
+  merchantInsights: [
+    {
+      merchantId: "MCH-00912",
+      name: "PT Tri Daya Komputindo",
+      monthlySales: 18_450_000_000,
+      growthPct: 14.2,
+      inventoryHealth: "Optimal",
+      pricingAlert: "Harga bersaing dengan indeks pasar 98.4%",
+    },
+    {
+      merchantId: "MCH-00431",
+      name: "CV Sinar Mandiri Industri",
+      monthlySales: 12_800_000_000,
+      growthPct: -3.5,
+      inventoryHealth: "Need Restock",
+      pricingAlert: "3 SKU memiliki harga 7% lebih tinggi dari rata-rata kategori",
+    },
+    {
+      merchantId: "MCH-01284",
+      name: "PT Berkah Logam Nusantara",
+      monthlySales: 9_240_000_000,
+      growthPct: 8.9,
+      inventoryHealth: "Optimal",
+      pricingAlert: "Margin optimal pada kuantitas pengadaan tier-2",
+    },
+    {
+      merchantId: "MCH-00109",
+      name: "Distributor FMCG Makmur Jaya",
+      monthlySales: 24_600_000_000,
+      growthPct: 21.0,
+      inventoryHealth: "Overstocked",
+      pricingAlert: "Rekomendasi diskon bundel untuk menghabiskan stok lambat",
+    },
+  ],
+
+  inventorySuggestions: [
+    {
+      sku: "SKU-ELC-99214",
+      productName: "Server Rack UPS 3000VA Enterprise",
+      currentStock: 8,
+      recommendedOrderQty: 45,
+      daysOfInventoryLeft: 3.2,
+      potentialStockoutLoss: 145_000_000,
+    },
+    {
+      sku: "SKU-IND-44102",
+      productName: "Hydraulic Fluid Drum ISO-VG 46 (200L)",
+      currentStock: 0,
+      recommendedOrderQty: 30,
+      daysOfInventoryLeft: 0,
+      potentialStockoutLoss: 98_000_000,
+    },
+    {
+      sku: "SKU-FMC-12099",
+      productName: "Thermal Paper Roll 80x80mm Box 50 Roll",
+      currentStock: 42,
+      recommendedOrderQty: 150,
+      daysOfInventoryLeft: 4.8,
+      potentialStockoutLoss: 42_000_000,
+    },
+  ],
+
+  pricingRecommendations: [
+    {
+      sku: "SKU-ELC-88120",
+      productName: "Industrial Managed Switch 24-Port Gigabit",
+      currentPrice: 8_450_000,
+      recommendedPrice: 8_190_000,
+      elasticityScore: 1.42,
+      projectedRevenueLiftPct: 8.6,
+      competitorIndexPrice: 8_150_000,
+    },
+    {
+      sku: "SKU-FMC-44019",
+      productName: "Heavy Duty Corrugated Carton Box A3 (Pack 100)",
+      currentPrice: 420_000,
+      recommendedPrice: 445_000,
+      elasticityScore: 0.65,
+      projectedRevenueLiftPct: 5.2,
+      competitorIndexPrice: 460_000,
+    },
+    {
+      sku: "SKU-AUT-22910",
+      productName: "Synthetic Engine Oil 5W-30 Full Synthetic 4L",
+      currentPrice: 580_000,
+      recommendedPrice: 565_000,
+      elasticityScore: 1.15,
+      projectedRevenueLiftPct: 4.1,
+      competitorIndexPrice: 560_000,
+    },
+  ],
+
+  // Operations Dashboard Data
+  fraudAlerts: [
+    {
+      flagId: "FRD-99104",
+      orderId: "ORD-202611-948120",
+      riskScore: 89,
+      triggerReason: "IP Address Proxy Anonymous + 5x Gagal CVV berturut-turut",
+      amount: 142_500_000,
+      status: "Blocked",
+      timestamp: "02 Nov 2026, 16:20",
+    },
+    {
+      flagId: "FRD-99103",
+      orderId: "ORD-202611-948088",
+      riskScore: 74,
+      triggerReason: "Perubahan alamat pengiriman drastis antar pulau 2 menit pasca checkout",
+      amount: 68_000_000,
+      status: "Under Review",
+      timestamp: "02 Nov 2026, 15:35",
+    },
+    {
+      flagId: "FRD-99098",
+      orderId: "ORD-202611-948012",
+      riskScore: 42,
+      triggerReason: "Pemesanan pertama kali dengan limit kredit korporat baru",
+      amount: 35_000_000,
+      status: "Cleared",
+      timestamp: "02 Nov 2026, 13:50",
+    },
+  ],
+
+  systemTelemetry: {
+    kafkaThroughputEventsPerSec: 42_850,
+    bigQueryQueryLatencyMs: 142,
+    apiSuccessRatePct: 99.98,
+    workerClusterHealthPct: 100.0,
+    lastCheckpointTime: "02 Nov 2026, 17:00:00 WIB",
+  },
+
+  // Marketing Dashboard Data
+  customerSegments: [
+    {
+      name: "Enterprise B2B Accounts",
+      customerCount: 142_800,
+      revenueContributionPct: 54.2,
+      avgOrderFrequency: "12x / bulan",
+      characteristics: "Faktur korporat NET-30, kontrak pengadaan tahunan, AOV tinggi",
+    },
+    {
+      name: "Wholesale & Sub-Distributor",
+      customerCount: 685_000,
+      revenueContributionPct: 26.5,
+      avgOrderFrequency: "6x / bulan",
+      characteristics: "Pengadaan partai besar, sensitif terhadap kupon ongkir armada truk",
+    },
+    {
+      name: "Retail High-Frequency",
+      customerCount: 2_840_000,
+      revenueContributionPct: 15.1,
+      avgOrderFrequency: "2.4x / bulan",
+      characteristics: "Pengguna QRIS dan Virtual Account, transaksi cepat",
+    },
+    {
+      name: "Dormant / At-Risk",
+      customerCount: 1_475_000,
+      revenueContributionPct: 4.2,
+      avgOrderFrequency: "0.2x / bulan",
+      characteristics: "Tidak ada transaksi dalam 90 hari terakhir, target re-aktivasi promo",
+    },
+  ],
+
+  conversionFunnel: [
+    {
+      stageName: "1. Visitor Sessions (Kunjungan Katalog)",
+      userCount: 48_500_000,
+      conversionRateFromPreviousPct: 100,
+      dropoffRatePct: 0,
+    },
+    {
+      stageName: "2. Product Detail Views (Tinjauan SKU)",
+      userCount: 28_200_000,
+      conversionRateFromPreviousPct: 58.1,
+      dropoffRatePct: 41.9,
+    },
+    {
+      stageName: "3. Add to Cart / Quotation (Tambah Keranjang)",
+      userCount: 14_900_000,
+      conversionRateFromPreviousPct: 52.8,
+      dropoffRatePct: 47.2,
+    },
+    {
+      stageName: "4. Checkout Initiated (Inisiasi Pemesanan)",
+      userCount: 6_240_000,
+      conversionRateFromPreviousPct: 41.9,
+      dropoffRatePct: 58.1,
+    },
+    {
+      stageName: "5. Payment Settled (Transaksi Sukses)",
+      userCount: 5_142_800,
+      conversionRateFromPreviousPct: 82.4,
+      dropoffRatePct: 17.6,
     },
   ],
 };

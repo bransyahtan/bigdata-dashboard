@@ -45,7 +45,7 @@ export const RecentOrdersTable: React.FC<RecentOrdersTableProps> = ({ orders }) 
     <Card className="bg-white">
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
-          <CardTitle>Aliran Transaksi Terkini (Real-time Stream Sampling)</CardTitle>
+          <CardTitle>Aliran Transaksi Terkini (Real-time Stream)</CardTitle>
           <CardDescription>
             Audit log order terkini dari pipeline ingest transaksi 15.2M records
           </CardDescription>
