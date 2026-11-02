@@ -187,14 +187,119 @@ export interface CategorySummary {
   stockHealthPct: number;
 }
 
+export interface ReviewSentimentSummary {
+  totalReviews: number; // 8.4M scale
+  averageRating: number; // e.g. 4.65
+  positivePct: number;
+  neutralPct: number;
+  negativePct: number;
+}
+
+export interface AnomalyAlert {
+  id: string;
+  timestamp: string;
+  metric: string;
+  severity: "High" | "Medium" | "Low";
+  description: string;
+  expectedRange: string;
+  observedValue: string;
+}
+
+export interface CustomerAcquisitionMetrics {
+  newCustomersMonthly: number;
+  retentionRatePct: number;
+  customerChurnRatePct: number;
+  ltvToCacRatio: number;
+  repeatPurchaseRatePct: number;
+}
+
+export interface MerchantInsight {
+  merchantId: string;
+  name: string;
+  monthlySales: number;
+  growthPct: number;
+  inventoryHealth: "Optimal" | "Need Restock" | "Overstocked";
+  pricingAlert: string;
+}
+
+export interface InventoryOptimizationSuggestion {
+  sku: string;
+  productName: string;
+  currentStock: number;
+  recommendedOrderQty: number;
+  daysOfInventoryLeft: number;
+  potentialStockoutLoss: number;
+}
+
+export interface PricingRecommendation {
+  sku: string;
+  productName: string;
+  currentPrice: number;
+  recommendedPrice: number;
+  elasticityScore: number;
+  projectedRevenueLiftPct: number;
+  competitorIndexPrice: number;
+}
+
+export interface FraudAlert {
+  flagId: string;
+  orderId: string;
+  riskScore: number; // 0 - 100
+  triggerReason: string;
+  amount: number;
+  status: "Under Review" | "Blocked" | "Cleared";
+  timestamp: string;
+}
+
+export interface SystemPipelineTelemetry {
+  kafkaThroughputEventsPerSec: number;
+  bigQueryQueryLatencyMs: number;
+  apiSuccessRatePct: number;
+  workerClusterHealthPct: number;
+  lastCheckpointTime: string;
+}
+
+export interface CustomerSegment {
+  name: string;
+  customerCount: number;
+  revenueContributionPct: number;
+  avgOrderFrequency: string;
+  characteristics: string;
+}
+
+export interface FunnelStage {
+  stageName: string;
+  userCount: number;
+  conversionRateFromPreviousPct: number;
+  dropoffRatePct: number;
+}
+
 export interface DashboardDataset {
   summaryKpis: DashboardSummaryKpis;
   monthlyOrderTrends: MonthlyOrderMetrics[];
   shippingMonthlyAnalytics: MonthlyShippingSummary;
   categoryBreakdown: CategorySummary[];
   inventoryAlerts: InventoryStock[];
+  reviewMetrics: ReviewSentimentSummary;
   paymentDistribution: PaymentDistribution[];
   activePromotions: PromotionCampaign[];
   recentOrders: Order[];
+
+  // Executive Extensions
+  executiveAnomalies: AnomalyAlert[];
+  customerAcquisition: CustomerAcquisitionMetrics;
+
+  // Merchant Dashboard Data
+  merchantInsights: MerchantInsight[];
+  inventorySuggestions: InventoryOptimizationSuggestion[];
+  pricingRecommendations: PricingRecommendation[];
+
+  // Operations Dashboard Data
+  fraudAlerts: FraudAlert[];
+  systemTelemetry: SystemPipelineTelemetry;
+
+  // Marketing Dashboard Data
+  customerSegments: CustomerSegment[];
+  conversionFunnel: FunnelStage[];
 }
 

@@ -1,27 +1,29 @@
 import React from "react";
-import { CategorySummary, InventoryStock } from "@/types/ecommerce";
+import { CategorySummary, InventoryStock, ReviewSentimentSummary } from "@/types/ecommerce";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { formatCompactNumber, formatCurrency, formatNumber } from "@/lib/utils";
-import { IconAlertTriangle } from "@/components/ui/icons";
+import { IconAlertTriangle, IconCheckCircle } from "@/components/ui/icons";
 
 interface CategoryAndInventoryProps {
   categories: CategorySummary[];
   inventoryAlerts: InventoryStock[];
+  reviewMetrics: ReviewSentimentSummary;
 }
 
 export const CategoryAndInventory: React.FC<CategoryAndInventoryProps> = ({
   categories,
   inventoryAlerts,
+  reviewMetrics,
 }) => {
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-      {/* 1. Category Performance */}
+      {/* 1. Category & Review Performance */}
       <Card className="bg-white">
         <CardHeader>
-          <CardTitle>Kontribusi Kategori Produk (2M SKU Catalog)</CardTitle>
+          <CardTitle>Kontribusi Kategori Produk & Ulasan (2M SKU & 8.4M Reviews)</CardTitle>
           <CardDescription>
-            Pangsa pendapatan per vertikal industri dan utilisasi SKU
+            Pangsa pendapatan per vertikal industri dan indeks kepuasan produk
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -47,12 +49,23 @@ export const CategoryAndInventory: React.FC<CategoryAndInventoryProps> = ({
             ))}
           </div>
 
-          <div className="rounded border border-zinc-200 bg-white p-3 text-xs text-zinc-600">
+          {/* Review & Sentiment Summary (Entity #7: reviews) */}
+          <div className="rounded border border-zinc-200 bg-white p-3 text-xs space-y-2">
             <div className="flex justify-between items-center">
-              <span>Indeks Kesehatan Stok Katalog Keseluruhan:</span>
-              <span className="font-mono font-bold text-emerald-700">
-                93.8% Sehat
+              <span className="font-medium text-zinc-800">Ulasan & Rating Produk ({formatCompactNumber(reviewMetrics.totalReviews)} records):</span>
+              <span className="font-mono font-bold text-zinc-900">
+                Score: {reviewMetrics.averageRating} / 5.0
               </span>
+            </div>
+            <div className="flex items-center justify-between text-[11px] text-zinc-500 font-mono">
+              <span className="text-emerald-700 font-medium">Positif: {reviewMetrics.positivePct}%</span>
+              <span className="text-zinc-600">Netral: {reviewMetrics.neutralPct}%</span>
+              <span className="text-rose-700">Negatif: {reviewMetrics.negativePct}%</span>
+            </div>
+            <div className="h-1.5 w-full overflow-hidden rounded bg-zinc-100 flex">
+              <div style={{ width: `${reviewMetrics.positivePct}%` }} className="bg-emerald-600" />
+              <div style={{ width: `${reviewMetrics.neutralPct}%` }} className="bg-zinc-400" />
+              <div style={{ width: `${reviewMetrics.negativePct}%` }} className="bg-rose-500" />
             </div>
           </div>
         </CardContent>
