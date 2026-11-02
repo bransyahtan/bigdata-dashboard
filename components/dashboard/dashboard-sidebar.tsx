@@ -21,7 +21,7 @@ interface DashboardSidebarProps {
 interface MenuItem {
   id: DashboardTab;
   title: string;
-  icon: React.FC<{ size?: number; className?: string }>;
+  icon: React.ComponentType<{ size?: number | string; className?: string }>;
 }
 
 export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
