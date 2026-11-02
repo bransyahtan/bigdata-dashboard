@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   IconActivity,
   IconBriefcase,
@@ -9,54 +11,50 @@ import {
   IconX,
 } from "@/components/ui/icons";
 
-export type DashboardTab = "executive" | "merchant" | "operations" | "marketing";
-
 interface DashboardSidebarProps {
-  activeTab: DashboardTab;
-  onSelectTab: (tab: DashboardTab) => void;
   isOpenMobile: boolean;
   onCloseMobile: () => void;
 }
 
 interface MenuItem {
-  id: DashboardTab;
   title: string;
+  href: string;
   icon: React.ComponentType<{ size?: number | string; className?: string }>;
+  isMatch: (pathname: string) => boolean;
 }
 
 export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
-  activeTab,
-  onSelectTab,
   isOpenMobile,
   onCloseMobile,
 }) => {
+  const pathname = usePathname();
+
   const menuItems: MenuItem[] = [
     {
-      id: "executive",
       title: "Executive Dashboard",
+      href: "/",
       icon: IconBriefcase,
+      isMatch: (path) => path === "/",
     },
     {
-      id: "merchant",
       title: "Merchant Dashboard",
+      href: "/merchant",
       icon: IconStore,
+      isMatch: (path) => path.startsWith("/merchant"),
     },
     {
-      id: "operations",
       title: "Operations Dashboard",
+      href: "/operation",
       icon: IconActivity,
+      isMatch: (path) => path.startsWith("/operation"),
     },
     {
-      id: "marketing",
       title: "Marketing Dashboard",
+      href: "/marketing",
       icon: IconMegaphone,
+      isMatch: (path) => path.startsWith("/marketing"),
     },
   ];
-
-  const handleSelect = (tab: DashboardTab) => {
-    onSelectTab(tab);
-    onCloseMobile();
-  };
 
   return (
     <>
@@ -71,12 +69,16 @@ export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-zinc-200 bg-white transition-transform duration-200 ease-in-out md:static md:z-auto md:w-64 md:translate-x-0 md:shrink-0 lg:w-72 ${isOpenMobile ? "translate-x-0 shadow-2xl" : "-translate-x-full md:translate-x-0"
-          }`}
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-zinc-200 bg-white transition-transform duration-200 ease-in-out md:static md:z-auto md:w-64 md:translate-x-0 md:shrink-0 lg:w-72 ${
+          isOpenMobile ? "translate-x-0 shadow-2xl" : "-translate-x-full md:translate-x-0"
+        }`}
       >
         {/* Brand & Organization Title (Exact h-[76px] to align with Header border line) */}
         <div className="flex h-[76px] shrink-0 items-center justify-between border-b border-zinc-200 px-5">
-          <div className="flex items-center gap-2.5">
+          <Link href="/" className="flex items-center gap-2.5" onClick={onCloseMobile}>
+            <div className="flex h-7 w-7 items-center justify-center rounded border border-zinc-300 bg-zinc-900 text-white font-mono text-xs font-bold">
+              EC
+            </div>
             <div>
               <div className="font-bold text-xs uppercase tracking-wider text-zinc-900">
                 Enterprise Data Platform
@@ -85,7 +87,7 @@ export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
                 Big Data Intelligence Hub
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Close button on mobile */}
           <button
@@ -98,21 +100,22 @@ export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
           </button>
         </div>
 
-        {/* Clean Menu Items (No child sub-bullets) */}
+        {/* Clean Menu Links (Real Next.js App Router Navigation) */}
         <nav className="flex-1 space-y-1.5 p-3">
           {menuItems.map((item) => {
-            const isActive = activeTab === item.id;
+            const isActive = item.isMatch(pathname);
             const Icon = item.icon;
 
             return (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => handleSelect(item.id)}
-                className={`flex w-full items-center justify-between rounded px-3 py-2.5 text-left text-xs font-semibold transition ${isActive
-                  ? "bg-zinc-900 text-white shadow-xs"
-                  : "text-zinc-700 hover:bg-zinc-100/80 active:bg-zinc-100"
-                  }`}
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={onCloseMobile}
+                className={`flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-xs font-semibold transition ${
+                  isActive
+                    ? "bg-zinc-900 text-white shadow-xs"
+                    : "text-zinc-700 hover:bg-zinc-100/80 active:bg-zinc-100"
+                }`}
               >
                 <div className="flex items-center gap-2.5">
                   <Icon size={15} className={isActive ? "text-white" : "text-zinc-500"} />
@@ -121,7 +124,7 @@ export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
                 {isActive && (
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                 )}
-              </button>
+              </Link>
             );
           })}
         </nav>

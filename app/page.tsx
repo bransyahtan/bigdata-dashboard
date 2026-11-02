@@ -1,15 +1,14 @@
 import React from "react";
+import { Metadata } from "next";
 import { dashboardService } from "@/services/dashboard.service";
-import { DashboardShell } from "@/components/dashboard/dashboard-shell";
+import { ExecutiveView } from "@/components/dashboard/views/executive-view";
 
-export const metadata = {
-  title: "Dashboard Eksekutif E-Commerce | Big Data Analytics",
-  description: "Enterprise Executive Big Data Dashboard: Executive, Merchant, Operations, & Marketing Analytics",
+export const metadata: Metadata = {
+  title: "Executive Dashboard | Enterprise Commerce Big Data",
+  description: "Executive Management & C-Level Big Data Analytics Dashboard",
 };
 
-export default async function DashboardPage() {
-  // Fetch dataset through Clean Architecture Service Layer
+export default async function ExecutiveDashboardPage() {
   const data = await dashboardService.getDashboardDataset();
-
-  return <DashboardShell initialData={data} />;
+  return <ExecutiveView data={data} />;
 }
