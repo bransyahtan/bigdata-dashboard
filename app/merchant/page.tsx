@@ -12,3 +12,4 @@ export default async function MerchantDashboardPage() {
   const data = await dashboardService.getDashboardDataset();
   return <MerchantView data={data} />;
 }
+

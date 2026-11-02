@@ -12,3 +12,4 @@ export default async function OperationsDashboardPage() {
   const data = await dashboardService.getDashboardDataset();
   return <OperationsView data={data} />;
 }
+

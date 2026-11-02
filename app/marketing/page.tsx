@@ -12,3 +12,4 @@ export default async function MarketingDashboardPage() {
   const data = await dashboardService.getDashboardDataset();
   return <MarketingView data={data} />;
 }
+
