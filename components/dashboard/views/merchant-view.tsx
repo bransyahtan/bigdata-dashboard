@@ -2,8 +2,7 @@ import React from "react";
 import { DashboardDataset } from "@/types/ecommerce";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { formatCompactNumber, formatCurrency, formatNumber, formatPercentage } from "@/lib/utils";
-import { IconPackage, IconTrendingUp, IconUsers } from "@/components/ui/icons";
+import { formatCurrency, formatPercentage } from "@/lib/utils";
 
 interface MerchantViewProps {
   data: DashboardDataset;
@@ -11,48 +10,52 @@ interface MerchantViewProps {
 
 export const MerchantView: React.FC<MerchantViewProps> = ({ data }) => {
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {/* 1. Merchant Sales Performance & Analytics */}
       <section>
         <Card className="bg-white">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <div>
+          <CardHeader className="flex flex-row items-start justify-between gap-3 space-y-0">
+            <div className="min-w-0 flex-1">
               <CardTitle>Performa Penjualan Merchant (Sales Performance & Analytics)</CardTitle>
               <CardDescription>
                 Monitoring volume omset, pertumbuhan kuartalan, dan kesehatan katalog mitra penjual utama
               </CardDescription>
             </div>
-            <Badge variant="outline">
+            <Badge variant="outline" className="shrink-0 mt-0.5">
               Top Enterprise Merchants
             </Badge>
           </CardHeader>
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="border-b border-zinc-200 bg-white text-[10px] uppercase tracking-wider text-zinc-500 font-mono">
+                <thead className="border-b border-zinc-200/80 bg-zinc-50/70 text-[10px] uppercase tracking-wider text-zinc-500 font-mono">
                   <tr>
-                    <th className="py-3 px-4 font-semibold">Merchant ID</th>
-                    <th className="py-3 px-4 font-semibold">Nama Mitra Penjual</th>
-                    <th className="py-3 px-4 text-right font-semibold">Omset Bulanan</th>
-                    <th className="py-3 px-4 text-center font-semibold">Pertumbuhan MoM</th>
-                    <th className="py-3 px-4 font-semibold">Kesehatan Stok</th>
-                    <th className="py-3 px-4 font-semibold">Insight & Rekomendasi</th>
+                    <th className="py-3 px-5 font-semibold">Merchant ID</th>
+                    <th className="py-3 px-5 font-semibold">Nama Mitra Penjual</th>
+                    <th className="py-3 px-5 text-right font-semibold">Omset Bulanan</th>
+                    <th className="py-3 px-5 text-center font-semibold">Pertumbuhan MoM</th>
+                    <th className="py-3 px-5 font-semibold">Kesehatan Stok</th>
+                    <th className="py-3 px-5 font-semibold">Insight & Rekomendasi</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-zinc-100">
                   {data.merchantInsights.map((mch) => (
-                    <tr key={mch.merchantId} className="hover:bg-zinc-50/70 transition">
-                      <td className="py-3 px-4 font-mono font-medium text-zinc-900">{mch.merchantId}</td>
-                      <td className="py-3 px-4 font-medium text-zinc-900">{mch.name}</td>
-                      <td className="py-3 px-4 text-right font-mono font-bold text-zinc-900">
+                    <tr key={mch.merchantId} className="hover:bg-zinc-50/80 transition-colors">
+                      <td className="py-3.5 px-5 font-mono font-medium text-zinc-900">{mch.merchantId}</td>
+                      <td className="py-3.5 px-5 font-semibold text-zinc-900">{mch.name}</td>
+                      <td className="py-3.5 px-5 text-right font-mono font-bold text-zinc-900">
                         {formatCurrency(mch.monthlySales, true)}
                       </td>
-                      <td className="py-3 px-4 text-center font-mono">
-                        <span className={mch.growthPct >= 0 ? "text-emerald-700 font-medium" : "text-rose-700 font-medium"}>
+                      <td className="py-3.5 px-5 text-center font-mono">
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-medium ${
+                          mch.growthPct >= 0 
+                            ? "bg-emerald-50 text-emerald-700 border border-emerald-200/60" 
+                            : "bg-rose-50 text-rose-700 border border-rose-200/60"
+                        }`}>
                           {formatPercentage(mch.growthPct)}
                         </span>
                       </td>
-                      <td className="py-3 px-4">
+                      <td className="py-3.5 px-5">
                         <Badge
                           variant={
                             mch.inventoryHealth === "Optimal"
@@ -61,12 +64,12 @@ export const MerchantView: React.FC<MerchantViewProps> = ({ data }) => {
                               ? "warning"
                               : "secondary"
                           }
-                          className="text-[9px]"
+                          className="text-[10px]"
                         >
                           {mch.inventoryHealth}
                         </Badge>
                       </td>
-                      <td className="py-3 px-4 text-zinc-600 text-[11px]">{mch.pricingAlert}</td>
+                      <td className="py-3.5 px-5 text-zinc-600 text-xs">{mch.pricingAlert}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -76,8 +79,8 @@ export const MerchantView: React.FC<MerchantViewProps> = ({ data }) => {
         </Card>
       </section>
 
-      {/* 2. Inventory Optimization & Pricing Recommendations (Two-column grid) */}
-      <section className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+      {/* 2. Inventory Optimization & Pricing Recommendations */}
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Inventory Optimization Suggestions */}
         <Card className="bg-white">
           <CardHeader>
@@ -86,29 +89,31 @@ export const MerchantView: React.FC<MerchantViewProps> = ({ data }) => {
               Kalkulasi safety stock berbasis algoritma run-rate penjualan untuk mencegah kehabisan stok
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="divide-y divide-zinc-100">
+          <CardContent className="space-y-3.5">
+            <div className="space-y-3">
               {data.inventorySuggestions.map((item) => (
-                <div key={item.sku} className="py-3 first:pt-0 last:pb-0 space-y-1.5">
+                <div key={item.sku} className="rounded-xl border border-zinc-200/80 bg-zinc-50/40 p-3.5 hover:border-zinc-300 transition-all space-y-2">
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="font-mono text-[10px] text-zinc-400">{item.sku}</span>
-                      <div className="text-xs font-semibold text-zinc-900">{item.productName}</div>
+                      <span className="font-mono text-[10px] text-zinc-400 bg-white px-2 py-0.5 rounded border border-zinc-200/80 shadow-2xs">
+                        {item.sku}
+                      </span>
+                      <div className="text-xs font-semibold text-zinc-900 mt-1">{item.productName}</div>
                     </div>
                     <div className="text-right font-mono">
                       <div className="text-xs font-bold text-zinc-900">
                         Order: +{item.recommendedOrderQty} unit
                       </div>
-                      <div className="text-[10px] text-zinc-400">
+                      <div className="text-[11px] text-zinc-400 mt-0.5">
                         Sisa: {item.daysOfInventoryLeft} hari
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between text-[11px] text-zinc-500 font-mono pt-1">
+                  <div className="flex items-center justify-between text-[11px] text-zinc-500 font-mono pt-1 border-t border-zinc-200/60">
                     <span>Stok Saat Ini: {item.currentStock} unit</span>
                     <span className="text-rose-700 font-medium">
-                      Potensi Rugi Stok Habis: {formatCurrency(item.potentialStockoutLoss, true)}
+                      Potensi Rugi: {formatCurrency(item.potentialStockoutLoss, true)}
                     </span>
                   </div>
                 </div>
@@ -125,28 +130,30 @@ export const MerchantView: React.FC<MerchantViewProps> = ({ data }) => {
               Optimasi elastisitas harga dan perbandingan indeks harga kompetitor industri
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="divide-y divide-zinc-100">
+          <CardContent className="space-y-3.5">
+            <div className="space-y-3">
               {data.pricingRecommendations.map((pr) => (
-                <div key={pr.sku} className="py-3 first:pt-0 last:pb-0 space-y-1.5">
+                <div key={pr.sku} className="rounded-xl border border-zinc-200/80 bg-zinc-50/40 p-3.5 hover:border-zinc-300 transition-all space-y-2">
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="font-mono text-[10px] text-zinc-400">{pr.sku}</span>
-                      <div className="text-xs font-semibold text-zinc-900">{pr.productName}</div>
+                      <span className="font-mono text-[10px] text-zinc-400 bg-white px-2 py-0.5 rounded border border-zinc-200/80 shadow-2xs">
+                        {pr.sku}
+                      </span>
+                      <div className="text-xs font-semibold text-zinc-900 mt-1">{pr.productName}</div>
                     </div>
                     <div className="text-right font-mono">
-                      <span className="text-xs font-bold text-emerald-700">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/60">
                         +{pr.projectedRevenueLiftPct}% Est. Lift
                       </span>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-2 text-[10px] font-mono text-zinc-500 pt-1">
+                  <div className="grid grid-cols-3 gap-2 text-[11px] font-mono text-zinc-500 pt-1 border-t border-zinc-200/60">
                     <div>
                       Harga Kini: <span className="font-bold text-zinc-900">{formatCurrency(pr.currentPrice)}</span>
                     </div>
                     <div>
-                      Saran Harga: <span className="font-bold text-emerald-800">{formatCurrency(pr.recommendedPrice)}</span>
+                      Saran: <span className="font-bold text-emerald-800">{formatCurrency(pr.recommendedPrice)}</span>
                     </div>
                     <div>
                       Pasar: <span className="text-zinc-600">{formatCurrency(pr.competitorIndexPrice)}</span>
@@ -169,51 +176,51 @@ export const MerchantView: React.FC<MerchantViewProps> = ({ data }) => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              <div className="rounded border border-zinc-200 bg-white p-3">
-                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">
+            <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-4">
+              <div className="rounded-xl border border-zinc-200/80 bg-zinc-50/50 p-4 hover:border-zinc-300 transition-all">
+                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider font-medium">
                   Ulasan & Rating Katalog
                 </span>
-                <div className="mt-1 font-mono text-base font-bold text-zinc-900">
+                <div className="mt-2 font-mono text-xl font-bold text-zinc-900">
                   {data.reviewMetrics.averageRating} / 5.0
                 </div>
-                <div className="text-[10px] text-emerald-700 font-mono mt-0.5">
+                <div className="text-[11px] text-emerald-700 font-mono mt-1 font-medium">
                   {data.reviewMetrics.positivePct}% sentimen positif
                 </div>
               </div>
 
-              <div className="rounded border border-zinc-200 bg-white p-3">
-                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">
+              <div className="rounded-xl border border-zinc-200/80 bg-zinc-50/50 p-4 hover:border-zinc-300 transition-all">
+                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider font-medium">
                   Repeat Purchase Rate
                 </span>
-                <div className="mt-1 font-mono text-base font-bold text-zinc-900">
+                <div className="mt-2 font-mono text-xl font-bold text-zinc-900">
                   64.2%
                 </div>
-                <div className="text-[10px] text-zinc-500 font-mono mt-0.5">
+                <div className="text-[11px] text-zinc-500 font-mono mt-1">
                   Pembelian berulang merchant
                 </div>
               </div>
 
-              <div className="rounded border border-zinc-200 bg-white p-3">
-                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">
+              <div className="rounded-xl border border-zinc-200/80 bg-zinc-50/50 p-4 hover:border-zinc-300 transition-all">
+                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider font-medium">
                   Rerata Keranjang (AOV)
                 </span>
-                <div className="mt-1 font-mono text-base font-bold text-zinc-900">
+                <div className="mt-2 font-mono text-xl font-bold text-zinc-900">
                   {formatCurrency(data.summaryKpis.totalRevenueYtd / data.summaryKpis.totalOrdersAnnual)}
                 </div>
-                <div className="text-[10px] text-zinc-500 font-mono mt-0.5">
-                  Per order belanja
+                <div className="text-[11px] text-zinc-500 font-mono mt-1">
+                  Per transaksi order
                 </div>
               </div>
 
-              <div className="rounded border border-zinc-200 bg-white p-3">
-                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">
+              <div className="rounded-xl border border-zinc-200/80 bg-zinc-50/50 p-4 hover:border-zinc-300 transition-all">
+                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider font-medium">
                   Tingkat Retur Barang
                 </span>
-                <div className="mt-1 font-mono text-base font-bold text-zinc-900">
+                <div className="mt-2 font-mono text-xl font-bold text-zinc-900">
                   0.3%
                 </div>
-                <div className="text-[10px] text-zinc-500 font-mono mt-0.5">
+                <div className="text-[11px] text-zinc-500 font-mono mt-1">
                   4.171 paket dikembalikan
                 </div>
               </div>
@@ -224,4 +231,3 @@ export const MerchantView: React.FC<MerchantViewProps> = ({ data }) => {
     </div>
   );
 };
-
