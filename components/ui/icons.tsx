@@ -27,4 +27,5 @@ export {
   Filter as IconFilter,
   Menu as IconMenu,
   X as IconX,
+  PieChart as IconPieChart,
 } from "lucide-react";

@@ -56,16 +56,16 @@ export const RecentOrdersTable: React.FC<RecentOrdersTableProps> = ({ orders }) 
       <CardContent className="p-0">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="border-b border-zinc-200 bg-white text-[10px] uppercase tracking-wider text-zinc-500 font-mono">
+            <thead className="border-b border-zinc-200/80 bg-zinc-50/60 text-[10px] uppercase tracking-wider text-zinc-500 font-mono">
               <tr>
-                <th className="py-3 px-4 font-semibold">Order ID</th>
-                <th className="py-3 px-4 font-semibold">Pelanggan / Entitas</th>
-                <th className="py-3 px-4 font-semibold">Waktu Transaksi</th>
-                <th className="py-3 px-4 text-center font-semibold">Item</th>
-                <th className="py-3 px-4 text-right font-semibold">Total Nilai</th>
-                <th className="py-3 px-4 font-semibold">Metode Bayar</th>
-                <th className="py-3 px-4 font-semibold">Status Order</th>
-                <th className="py-3 px-4 font-semibold">Logistik / Resi</th>
+                <th className="py-3 px-5 font-semibold">Order ID</th>
+                <th className="py-3 px-5 font-semibold">Pelanggan / Entitas</th>
+                <th className="py-3 px-5 font-semibold">Waktu Transaksi</th>
+                <th className="py-3 px-5 text-center font-semibold">Item</th>
+                <th className="py-3 px-5 text-right font-semibold">Total Nilai</th>
+                <th className="py-3 px-5 font-semibold">Metode Bayar</th>
+                <th className="py-3 px-5 font-semibold">Status Order</th>
+                <th className="py-3 px-5 font-semibold">Logistik / Resi</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-100">
@@ -76,40 +76,40 @@ export const RecentOrdersTable: React.FC<RecentOrdersTableProps> = ({ orders }) 
                 return (
                   <tr
                     key={order.id}
-                    className="hover:bg-zinc-50/70 transition"
+                    className="hover:bg-zinc-50/80 transition-colors"
                   >
-                    <td className="py-3 px-4 font-mono font-medium text-zinc-900">
+                    <td className="py-3.5 px-5 font-mono font-medium text-zinc-900">
                       {order.id}
                     </td>
-                    <td className="py-3 px-4">
-                      <div className="font-medium text-zinc-900">
+                    <td className="py-3.5 px-5">
+                      <div className="font-semibold text-zinc-900">
                         {order.customerName}
                       </div>
-                      <div className="font-mono text-[10px] text-zinc-400">{order.customerId}</div>
+                      <div className="font-mono text-[10px] text-zinc-400 mt-0.5">{order.customerId}</div>
                     </td>
-                    <td className="py-3 px-4 font-mono text-zinc-500 text-[11px]">
+                    <td className="py-3.5 px-5 font-mono text-zinc-500 text-[11px]">
                       {order.createdAt}
                     </td>
-                    <td className="py-3 px-4 text-center font-mono">{order.itemCount}</td>
-                    <td className="py-3 px-4 text-right font-mono font-bold text-zinc-900">
+                    <td className="py-3.5 px-5 text-center font-mono font-medium text-zinc-700">
+                      {order.itemCount}
+                    </td>
+                    <td className="py-3.5 px-5 text-right font-mono font-bold text-zinc-900">
                       {formatCurrency(order.totalAmount)}
                     </td>
-                    <td className="py-3 px-4 text-zinc-600">
-                      <div>{order.paymentMethod}</div>
-                      <div className="font-mono text-[10px] text-zinc-400">
+                    <td className="py-3.5 px-5 text-zinc-600">
+                      <div className="font-medium text-zinc-800">{order.paymentMethod}</div>
+                      <div className="font-mono text-[10px] text-zinc-400 mt-0.5">
                         Status: {order.paymentStatus}
                       </div>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="py-3.5 px-5">
                       <Badge variant={statusBadge.variant}>{statusBadge.label}</Badge>
                     </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-1.5">
-                        <Badge variant={shippingBadge.variant} className="text-[9px]">
-                          {shippingBadge.label}
-                        </Badge>
-                      </div>
-                      <div className="font-mono text-[10px] text-zinc-400 mt-0.5">
+                    <td className="py-3.5 px-5">
+                      <Badge variant={shippingBadge.variant}>
+                        {shippingBadge.label}
+                      </Badge>
+                      <div className="font-mono text-[10px] text-zinc-400 mt-1">
                         {order.shippingTrackingNumber}
                       </div>
                     </td>

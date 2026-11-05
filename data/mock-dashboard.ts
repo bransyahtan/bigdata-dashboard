@@ -246,37 +246,37 @@ export const MOCK_DASHBOARD_DATA: DashboardDataset = {
     },
   ],
 
-  // Payment Settlement Distribution
+  // Payment Settlement Distribution (QRIS, CC, Debit, COD, Cash)
   paymentDistribution: [
     {
-      method: "Virtual Account BCA",
-      sharePercentage: 42.5,
-      transactionVolume: 590_920,
-      totalGmv: 98_260_000_000,
+      method: "QRIS Enterprise & Dynamic",
+      sharePercentage: 31.4,
+      transactionVolume: 436_585,
+      totalGmv: 76_930_000_000,
     },
     {
-      method: "Mandiri Bill Payment",
-      sharePercentage: 24.8,
-      transactionVolume: 344_819,
-      totalGmv: 57_337_600_000,
+      method: "Kartu Kredit (Credit Card / CC)",
+      sharePercentage: 24.6,
+      transactionVolume: 342_038,
+      totalGmv: 60_270_000_000,
     },
     {
-      method: "QRIS Enterprise",
-      sharePercentage: 18.2,
-      transactionVolume: 253_052,
-      totalGmv: 42_078_400_000,
+      method: "Debit Online & Virtual Account",
+      sharePercentage: 20.8,
+      transactionVolume: 289_203,
+      totalGmv: 50_960_000_000,
     },
     {
-      method: "Corporate Invoicing / NET-30",
+      method: "Cash on Delivery (COD)",
+      sharePercentage: 13.5,
+      transactionVolume: 187_704,
+      totalGmv: 33_075_000_000,
+    },
+    {
+      method: "Tunai & Transfer Bank (Cash)",
       sharePercentage: 9.7,
-      transactionVolume: 134_868,
-      totalGmv: 22_426_400_000,
-    },
-    {
-      method: "Corporate Credit Card",
-      sharePercentage: 4.8,
-      transactionVolume: 66_739,
-      totalGmv: 11_097_600_000,
+      transactionVolume: 134_870,
+      totalGmv: 23_765_000_000,
     },
   ],
 

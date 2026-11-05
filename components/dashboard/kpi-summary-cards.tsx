@@ -10,40 +10,44 @@ interface KpiSummaryCardsProps {
 
 export const KpiSummaryCards: React.FC<KpiSummaryCardsProps> = ({ kpis }) => {
   return (
-    <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-5">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
       {/* 1. GMV Revenue */}
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex items-center justify-between text-xs text-zinc-500">
-            <span>Pendapatan Kotor (GMV)</span>
-            <IconBarChart size={13} className="text-zinc-400" />
+      <Card className="hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
+        <CardContent className="p-5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-medium text-zinc-500">Gross Merchandise Value</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100/80 text-zinc-600">
+              <IconBarChart size={16} />
+            </div>
           </div>
-          <div className="mt-2 text-xl font-bold tracking-tight text-zinc-900 font-mono">
+          <div className="mt-3 text-2xl font-bold tracking-tight text-zinc-900 font-mono">
             {formatCurrency(kpis.totalRevenueYtd, true)}
           </div>
-          <div className="mt-2 flex items-center gap-1.5 text-[11px]">
-            <span className="inline-flex items-center text-emerald-700 font-medium">
-              <IconTrendingUp size={11} className="mr-0.5" />
+          <div className="mt-2.5 flex items-center gap-2 text-[11px]">
+            <span className="inline-flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700 border border-emerald-200/60">
+              <IconTrendingUp size={12} />
               {formatPercentage(kpis.totalRevenueMoMGrowth)}
             </span>
-            <span className="text-zinc-400">MoM growth</span>
+            <span className="text-zinc-400">vs bulan lalu</span>
           </div>
         </CardContent>
       </Card>
 
       {/* 2. Total Volume Orders */}
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex items-center justify-between text-xs text-zinc-500">
-            <span>Total Transaksi Order</span>
-            <IconPackage size={13} className="text-zinc-400" />
+      <Card className="hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
+        <CardContent className="p-5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-medium text-zinc-500">Total Volume Order</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100/80 text-zinc-600">
+              <IconPackage size={16} />
+            </div>
           </div>
-          <div className="mt-2 text-xl font-bold tracking-tight text-zinc-900 font-mono">
+          <div className="mt-3 text-2xl font-bold tracking-tight text-zinc-900 font-mono">
             {formatCompactNumber(kpis.totalOrdersAnnual)}
           </div>
-          <div className="mt-2 flex items-center gap-1.5 text-[11px]">
-            <span className="inline-flex items-center text-emerald-700 font-medium">
-              <IconTrendingUp size={11} className="mr-0.5" />
+          <div className="mt-2.5 flex items-center gap-2 text-[11px]">
+            <span className="inline-flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700 border border-emerald-200/60">
+              <IconTrendingUp size={12} />
               {formatPercentage(kpis.totalOrdersMoMGrowth)}
             </span>
             <span className="text-zinc-400">15.2M records</span>
@@ -52,37 +56,41 @@ export const KpiSummaryCards: React.FC<KpiSummaryCardsProps> = ({ kpis }) => {
       </Card>
 
       {/* 3. Customer Base */}
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex items-center justify-between text-xs text-zinc-500">
-            <span>Pelanggan Terdaftar</span>
-            <IconUsers size={13} className="text-zinc-400" />
+      <Card className="hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
+        <CardContent className="p-5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-medium text-zinc-500">Basis Pelanggan Aktif</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100/80 text-zinc-600">
+              <IconUsers size={16} />
+            </div>
           </div>
-          <div className="mt-2 text-xl font-bold tracking-tight text-zinc-900 font-mono">
+          <div className="mt-3 text-2xl font-bold tracking-tight text-zinc-900 font-mono">
             {formatCompactNumber(kpis.activeCustomerBase)}
           </div>
-          <div className="mt-2 flex items-center gap-1.5 text-[11px]">
-            <span className="inline-flex items-center text-emerald-700 font-medium">
-              <IconTrendingUp size={11} className="mr-0.5" />
+          <div className="mt-2.5 flex items-center gap-2 text-[11px]">
+            <span className="inline-flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700 border border-emerald-200/60">
+              <IconTrendingUp size={12} />
               {formatPercentage(kpis.activeCustomerMoMGrowth)}
             </span>
-            <span className="text-zinc-400">5.1M entitas</span>
+            <span className="text-zinc-400">5.1M akun</span>
           </div>
         </CardContent>
       </Card>
 
       {/* 4. Shipping SLA On-Time */}
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex items-center justify-between text-xs text-zinc-500">
-            <span>Fulfillment Tepat Waktu</span>
-            <IconTruck size={13} className="text-zinc-400" />
+      <Card className="hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
+        <CardContent className="p-5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-medium text-zinc-500">Fulfillment Tepat Waktu</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100/80 text-zinc-600">
+              <IconTruck size={16} />
+            </div>
           </div>
-          <div className="mt-2 text-xl font-bold tracking-tight text-zinc-900 font-mono">
+          <div className="mt-3 text-2xl font-bold tracking-tight text-zinc-900 font-mono">
             {kpis.shippingOnTimeRate}%
           </div>
-          <div className="mt-2 flex items-center gap-1.5 text-[11px]">
-            <span className="font-medium text-amber-700">
+          <div className="mt-2.5 flex items-center gap-2 text-[11px]">
+            <span className="inline-flex items-center rounded-md bg-amber-50 px-2 py-0.5 font-medium text-amber-700 border border-amber-200/60">
               Delay {kpis.shippingDelayRate}%
             </span>
             <span className="text-zinc-400">Target SLA: 95%</span>
@@ -91,18 +99,22 @@ export const KpiSummaryCards: React.FC<KpiSummaryCardsProps> = ({ kpis }) => {
       </Card>
 
       {/* 5. Product SKUs Catalog */}
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex items-center justify-between text-xs text-zinc-500">
-            <span>Katalog SKU Aktif</span>
-            <IconPackage size={13} className="text-zinc-400" />
+      <Card className="hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
+        <CardContent className="p-5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-medium text-zinc-500">Katalog SKU Aktif</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100/80 text-zinc-600">
+              <IconPackage size={16} />
+            </div>
           </div>
-          <div className="mt-2 text-xl font-bold tracking-tight text-zinc-900 font-mono">
+          <div className="mt-3 text-2xl font-bold tracking-tight text-zinc-900 font-mono">
             {formatCompactNumber(kpis.totalSkusCatalog)}
           </div>
-          <div className="mt-2 flex items-center gap-1.5 text-[11px]">
-            <span className="text-zinc-700 font-medium">2.05M SKU</span>
-            <span className="text-zinc-400">5 kategori</span>
+          <div className="mt-2.5 flex items-center gap-2 text-[11px]">
+            <span className="rounded-md bg-zinc-100 px-2 py-0.5 font-medium text-zinc-700">
+              2.05M SKU
+            </span>
+            <span className="text-zinc-400">5 vertikal</span>
           </div>
         </CardContent>
       </Card>
