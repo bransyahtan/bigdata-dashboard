@@ -40,6 +40,12 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         subtitle: "Efektivitas kampanye promosi, segmentasi kohort pelanggan, dan konversi corong",
       };
     }
+    if (pathname.startsWith("/analytics") || pathname.startsWith("/bigdata")) {
+      return {
+        title: "Big Data Predictive & Prescriptive Analytics",
+        subtitle: "Machine learning forecasting: demand regional, optimasi rute logistik, dan prediksi burn-rate stok",
+      };
+    }
     return {
       title: "Executive Strategic Overview",
       subtitle: "Monitoring 15.2M transaksi, 5.1M pelanggan, dan pendapatan Rp 2.45T",

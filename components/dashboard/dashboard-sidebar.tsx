@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import {
   IconActivity,
   IconBriefcase,
+  IconCpu,
   IconMegaphone,
   IconStore,
   IconX,
@@ -54,6 +55,13 @@ export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
       href: "/marketing",
       icon: IconMegaphone,
       isMatch: (path) => path.startsWith("/marketing"),
+    },
+    {
+      title: "Big Data Analytics",
+      href: "/analytics",
+      icon: IconCpu,
+      isMatch: (path) => path.startsWith("/analytics") || path.startsWith("/bigdata"),
+      badge: "Predictive ML",
     },
   ];
 
@@ -129,8 +137,13 @@ export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
                   />
                   <span>{item.title}</span>
                 </div>
+                {item.badge && !isActive && (
+                  <span className="text-[9px] font-mono font-semibold px-1.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/70 shrink-0">
+                    {item.badge}
+                  </span>
+                )}
                 {isActive && (
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shrink-0" />
                 )}
               </Link>
             );

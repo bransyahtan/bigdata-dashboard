@@ -28,4 +28,12 @@ export {
   Menu as IconMenu,
   X as IconX,
   PieChart as IconPieChart,
+  Cpu as IconCpu,
+  MapPin as IconMapPin,
+  Navigation as IconNavigation,
+  Boxes as IconBoxes,
+  ArrowUpRight as IconArrowUpRight,
+  ArrowDownRight as IconArrowDownRight,
+  Calendar as IconCalendar,
+  Gauge as IconGauge,
 } from "lucide-react";
