@@ -274,6 +274,52 @@ export interface FunnelStage {
   dropoffRatePct: number;
 }
 
+// ==========================================
+// Big Data Advanced & Predictive Analytics
+// ==========================================
+
+export interface DemandForecastItem {
+  id: string;
+  region: string;
+  productSku: string;
+  productName: string;
+  category: string;
+  currentMonthlyDemand: number;
+  forecastedDemandNextMonth: number;
+  projectedGrowthPct: number;
+  confidenceScorePct: number;
+  demandLevel: "Lonjakan Tinggi" | "Pertumbuhan Stabil" | "Permintaan Sedang";
+  keyDriver: string;
+}
+
+export interface LogisticsRouteOptimization {
+  id: string;
+  originHub: string;
+  destinationCity: string;
+  courierFleet: string;
+  avgDurationDays: number;
+  avgCostPerKg: number;
+  onTimeSlaPct: number;
+  performanceTier: "Paling Cepat & Murah" | "Paling Lambat & Mahal" | "Standar Efisien" | "Perlu Optimalisasi";
+  monthlyShipmentVolume: number;
+  optimizationRecommendation: string;
+}
+
+export interface PredictiveStockDepletion {
+  sku: string;
+  productName: string;
+  category: string;
+  warehouseLocation: string;
+  currentAvailableStock: number;
+  dailyBurnRateUnits: number;
+  daysUntilStockout: number;
+  predictedStockoutDate: string;
+  urgencyLevel: "Kritis (< 5 Hari)" | "Peringatan (5-10 Hari)" | "Perhatian (11-20 Hari)" | "Aman (> 20 Hari)";
+  recommendedReorderQty: number;
+  estimatedLostRevenueIfOut: number;
+  leadTimeRestockDays: number;
+}
+
 export interface DashboardDataset {
   summaryKpis: DashboardSummaryKpis;
   monthlyOrderTrends: MonthlyOrderMetrics[];
@@ -301,5 +347,10 @@ export interface DashboardDataset {
   // Marketing Dashboard Data
   customerSegments: CustomerSegment[];
   conversionFunnel: FunnelStage[];
+
+  // Big Data Predictive Analytics
+  demandForecasts: DemandForecastItem[];
+  logisticsRouteOptimizations: LogisticsRouteOptimization[];
+  predictiveStockDepletions: PredictiveStockDepletion[];
 }
 
